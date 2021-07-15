@@ -19,5 +19,6 @@ public class User {
     private String mail;
     private String password;
     private String nameCompany;
-    //private Set<String> role;
+    @Transient //хз правильн или нет изучить
+    private Set<Role> role;
 }

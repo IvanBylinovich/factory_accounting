@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -9,6 +10,9 @@
 <div>
     <a href="/db">db h2</a>
     <a href="/">home</a>
+    <form th:action="@{/logout}" method="post">
+        <button>LOGOUT</button>
+    </form>
 </div>
 </body>
 </html>

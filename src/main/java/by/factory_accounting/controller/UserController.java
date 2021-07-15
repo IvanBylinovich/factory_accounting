@@ -4,11 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
+    //logout в Security уже создан в методе POST
 
     @GetMapping("/login")
     public ModelAndView auth(){
