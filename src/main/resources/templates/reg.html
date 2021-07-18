@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Reg</title>
+</head>
+<body>
+<form th:action="@{user/reg}" method="post"
+      th:object="${user}">
+
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="mail">Mail</label>
+            <input type="email"class="form-control" id="mail" th:object="*{User.setMail}"> </input>
+        </div>
+        <div class="form-group">
+            <label for="password">password</label>
+            <input type="password"class="form-control" id="password" th:field="*{User.setPassword}"> </input>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description"
+                   th:field="*{description}"> </input>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

@@ -1,23 +1,25 @@
 package by.factory_accounting.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override //метод настраивает интерсепторы(доступ к url в зависимости от роли пользователя)
+    @Override //метод настраивает авторизации,  интерсепторы(доступ к url в зависимости от роли пользователя и его состояния)
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .antMatchers("/", "/user/login").permitAll()
+            .antMatchers("/").permitAll()
+            .antMatchers("/user/logout").authenticated()
+            .antMatchers("/user/login").not().authenticated()
             .anyRequest().authenticated()
             .and()
             .formLogin()
@@ -26,23 +28,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
             .permitAll();
     }
-    @Bean
-    @Override
-    //метот кладет user в систему, в таком виде полезен для разработки
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("user")
-                        .roles("USER")
-                        .build();
-        UserDetails user2 =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("admin")
-                        .roles("ADMIN")
-                        .build();
 
-        return new InMemoryUserDetailsManager(user, user2);
+    @Bean//кодит пароль перед тем как сохранить его в базе
+    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(10);
+        return bCryptPasswordEncoder;
+    }
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,8 @@ public class User {
     private String mail;
     private String password;
     private String nameCompany;
-    @Transient //хз правильн или нет изучить
-    private Set<Role> role;
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
 }
