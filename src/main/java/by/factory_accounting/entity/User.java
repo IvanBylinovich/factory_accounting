@@ -13,12 +13,25 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "USERS_COMPANY")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String mail;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "password")
     private String password;
-    private String nameCompany;
-    @Transient //хз правильн или нет изучить
-    private Set<Role> role;
+    @Column(name = "role")
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
+    private Status status;
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+        this.role = Role.USER;
+        this.status =  Status.USER_ACTIVE;
+    }
 }

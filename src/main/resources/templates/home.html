@@ -7,11 +7,19 @@
 </head>
 <body>
 <p>Home</p>
+<div><a href="/db">db h2<</a></div>
+<div><a href="/">home</a></div>
+<div><a href="/user/reg">redistration</a></div>
 <div>
-    <a href="/db">db h2</a>
-    <a href="/">home</a>
-    <form th:action="@{/logout}" method="post">
+    <form th:action="@{/user/logout}" method="post">
         <button>LOGOUT</button>
+
+        <section th:each="user : ${users}">
+            <p th:text="${user}"></p>
+            <ul>
+                <li th:each="phone: ${user}"></li>
+            </ul>
+        </section>
     </form>
 </div>
 </body>

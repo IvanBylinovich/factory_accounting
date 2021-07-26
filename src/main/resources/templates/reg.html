@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Reg</title>
+</head>
+<body>
+<div class="row d-flex justify-content-center">
+    <div class="col-6 justify-content-center">
+        <form th:action="@{/user/reg}" th:object="${userDto}" method="POST" class="row g-6">
+            <div class="col-md-12">
+                <label for="Email" class="form-label">Email</label>
+                <input th:field="*{username}" type="text" class="form-control" id="Email" placeholder="example@gmail.ru">
+            </div>
+            <div class="col-12">
+                <label for="inputPassword4" class="form-label">Password</label>
+                <input th:field="*{password}" type="password" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-12 mt-2">
+                <button class="btn btn-primary">Sign in</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>

@@ -1,48 +1,68 @@
 package by.factory_accounting.config;
 
+import by.factory_accounting.entity.Permission;
+import by.factory_accounting.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+    private final UserService userService;
+
+    @Autowired
+    public WebSecurityConfig (@Qualifier("userService") UserService userService){
+        this.userService = userService;
+    };
+
     @Override //метод настраивает интерсепторы(доступ к url в зависимости от роли пользователя)
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-            .antMatchers("/", "/user/login").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/user/login").permitAll()
-            .and()
-            .logout()
-            .permitAll();
-    }
-    @Bean
-    @Override
-    //метот кладет user в систему, в таком виде полезен для разработки
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("user")
-                        .roles("USER")
-                        .build();
-        UserDetails user2 =
-                User.withDefaultPasswordEncoder()
-                        .username("admin")
-                        .password("admin")
-                        .roles("ADMIN")
-                        .build();
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/user/reg").permitAll()
+                .antMatchers("/user/testUser").hasAuthority(Permission.USER_READ.getPermission())
+                .antMatchers("/user/testAdmin").hasAuthority(Permission.USER_WRITE.getPermission())
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/user/login").permitAll()
+                .defaultSuccessUrl("/")
+                .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout", "POST"))// создание нового метода для логаута(более безопасный чем стандартный)
+                .invalidateHttpSession(true)//закрытие сессии
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")//удаляет ключ по которому автоидентифицировался user
+                .logoutSuccessUrl("/user/login");//страница на которую перенаправляет после logout
 
-        return new InMemoryUserDetailsManager(user, user2);
+    }
+
+    @Bean
+    protected PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder(12);
+    }
+    //
+    @Bean
+    protected DaoAuthenticationProvider daoAuthenticationProvider(){
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userService);
+        return daoAuthenticationProvider;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 }
