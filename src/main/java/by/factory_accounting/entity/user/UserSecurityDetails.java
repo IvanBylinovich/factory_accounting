@@ -1,7 +1,5 @@
-package by.factory_accounting.entity;
+package by.factory_accounting.entity.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

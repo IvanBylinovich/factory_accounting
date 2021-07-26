@@ -1,6 +1,6 @@
 package by.factory_accounting.config;
 
-import by.factory_accounting.entity.Permission;
+import by.factory_accounting.entity.user.Permission;
 import by.factory_accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -28,11 +28,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override //метод настраивает интерсепторы(доступ к url в зависимости от роли пользователя)
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .cors()
+                .and()
+                .csrf().ignoringAntMatchers("/db/**")
+                .and()
                 .authorizeRequests()
                 .antMatchers("/", "/user/reg").permitAll()
                 .antMatchers("/user/testUser").hasAuthority(Permission.USER_READ.getPermission())
-                .antMatchers("/user/testAdmin").hasAuthority(Permission.USER_WRITE.getPermission())
+                .antMatchers("/user/testAdmin", "/product/editing/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

@@ -1,7 +1,7 @@
 package by.factory_accounting.service;
 
-import by.factory_accounting.entity.User;
-import by.factory_accounting.entity.UserSecurityDetails;
+import by.factory_accounting.entity.user.User;
+import by.factory_accounting.entity.user.UserSecurityDetails;
 import by.factory_accounting.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

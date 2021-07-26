@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Filter</title>
+</head>
+<body>
+<form th:action="@{/product/editing}" th:object="${product}" method="POST">
+    <div  class="mb-3">
+        <label for="product" class="form-label">Name of product</label>
+        <input th:field="*{name}" type="text" class="form-control" id="product" name="name"/>
+    </div>
+    <div  class="mb-3">
+        <label for="productUnit" class="form-label">Unit of measurement</label>
+        <input th:field="*{unit}" type="text" class="form-control" id="productUnit" name="unit"/>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package by.factory_accounting.entity;
+package by.factory_accounting.entity.user;
 
 public enum Permission {
     USER_READ("read"),

@@ -1,6 +1,5 @@
-package by.factory_accounting.entity;
+package by.factory_accounting.entity.user;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Set;

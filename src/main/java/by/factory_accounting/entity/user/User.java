@@ -1,11 +1,10 @@
-package by.factory_accounting.entity;
+package by.factory_accounting.entity.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Data
