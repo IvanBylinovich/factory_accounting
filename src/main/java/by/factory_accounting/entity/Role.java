@@ -1,15 +1,28 @@
 package by.factory_accounting.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-public enum Role implements GrantedAuthority {
-    USER, ADMIN, SUPPLIER, MASTER, MANAGER;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    @Override
-    public String getAuthority() {
-        return name();
+public enum Role{
+    USER(Set.of(Permission.USER_READ)),
+    ADMIN(Set.of(Permission.USER_WRITE, Permission.USER_READ));
+
+    public Set<Permission> getPermissions() {
+        return permissions;
     }
-    //необходимо определить гетор с логикой по которой будут определяться роли
 
+    private final Set<Permission> permissions;
 
+    Role(Set<Permission> permissions) {
+        this.permissions = permissions;
+    }
+
+    public Set<SimpleGrantedAuthority> getAuthorities(){
+        return getPermissions().stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .collect(Collectors.toSet());
+    }
 }

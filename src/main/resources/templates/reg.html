@@ -6,7 +6,7 @@
     <title>Reg</title>
 </head>
 <body>
-<<<<<<< HEAD
+
 <div class="row d-flex justify-content-center">
     <div class="col-6 justify-content-center">
         <form th:action="@{/user/reg}" th:object="${userDto}" method="POST" class="row g-6">
@@ -24,30 +24,5 @@
         </form>
     </div>
 </div>
-
-=======
-<form th:action="@{user/reg}" method="post"
-      th:object="${user}">
-
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="mail">Mail</label>
-            <input type="email"class="form-control" id="mail" th:object="*{User.setMail}"> </input>
-        </div>
-        <div class="form-group">
-            <label for="password">password</label>
-            <input type="password"class="form-control" id="password" th:field="*{User.setPassword}"> </input>
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description"
-                   th:field="*{description}"> </input>
-        </div>
-    </div>
-</form>
->>>>>>> origin/master
-
-
 </body>
 </html>
