@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "USERS_COMPANY")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
