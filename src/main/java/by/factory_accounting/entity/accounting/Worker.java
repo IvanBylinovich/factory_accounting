@@ -20,7 +20,10 @@ public class Worker {
     private long id;
     private String name;
     private String specialization;
-    private BigDecimal payment;
     private BigDecimal salary;
 
+    public Worker(String name, String specialization) {
+        this.name = name;
+        this.specialization = specialization;
+    }
 }

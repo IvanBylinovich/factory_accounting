@@ -1,8 +1,6 @@
 package by.factory_accounting.controller;
 
 import by.factory_accounting.entity.accounting.Product;
-import by.factory_accounting.entity.dto.UserDto;
-import by.factory_accounting.repository.ProductRepository;
 import by.factory_accounting.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,13 +17,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/editing")
+    @GetMapping("/create")
     public ModelAndView createProduct(Model model){
         model.addAttribute("product", new Product());
         return new ModelAndView("creationOfProduct");
     }
 
-    @PostMapping("/editing")
+    @PostMapping("/create")
     public ModelAndView create(Product product, Model model){
         try {
 
@@ -36,5 +34,11 @@ public class ProductController {
             model.addAttribute("message", e.getMessage());
             return new ModelAndView("creationOfProduct");
         }
+    }
+
+    @GetMapping("/filter")
+    public ModelAndView showProductFilter(Model model){
+        model.addAttribute("products", productService.getAllProduct());
+        return new ModelAndView("filterProduct");
     }
 }

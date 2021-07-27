@@ -1,5 +1,6 @@
 package by.factory_accounting.controller;
 
+import by.factory_accounting.entity.user.User;
 import by.factory_accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -6,7 +6,7 @@
     <title>Filter</title>
 </head>
 <body>
-<form th:action="@{/product/editing}" th:object="${product}" method="POST">
+<form th:action="@{/product/create}" th:object="${product}" method="POST">
     <div  class="mb-3">
         <label for="product" class="form-label">Name of product</label>
         <input th:field="*{name}" type="text" class="form-control" id="product" name="name"/>
@@ -17,5 +17,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<div class="alert alert-primary" role="alert">
+    <li th:text="${message}"></li>
+</div>
 </body>
 </html>

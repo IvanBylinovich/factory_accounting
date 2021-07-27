@@ -7,21 +7,26 @@
 </head>
 <body>
 <p>Home</p>
+<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
 <div><a href="/db">db h2<</a></div>
 <div><a href="/">home</a></div>
-<div><a href="/user/reg">redistration</a></div>
+<div><a href="/user/reg">registration</a></div>
 <div><a href="/user/login">login<</a></div>
+<div><p>======УЧЕТ======</p></div>
+<div><a href="/product/create">Creation of product</a></div>
+<div><a href="/product/filter">Filter of product</a></div>
+<div><a href="/worker/create">Creation of worker</a></div>
+<div><a href="/worker/filter">Filter of worker</a></div>
 <div>
     <form th:action="@{/user/logout}" method="post">
         <button>LOGOUT</button>
-
-        <section th:each="user : ${users}">
-            <p th:text="${user}"></p>
-            <ul>
-                <li th:each="phone: ${user}"></li>
-            </ul>
-        </section>
     </form>
+    <section th:each="user : ${users}">
+        <p th:text="${user}"></p>
+        <ul>
+            <li th:each="phone: ${user}"></li>
+        </ul>
+    </section>
 </div>
 </body>
 </html>

@@ -46,9 +46,16 @@ public class UserController {
     }
 
     @PostMapping("/reg")
-    public ModelAndView saveUserReg(UserDto userDto) {
+    public ModelAndView saveUserReg(UserDto userDto, Model model) {
+        if(userService.findUserByEmail(userDto.getUsername()).isPresent()){
+            model.addAttribute("message", "this username is already occupied");
+            return new ModelAndView("reg");
+        }
         userService.saveUser(new User(10, userDto.getUsername(), userDto.getPassword(), Role.ADMIN, Status.USER_ACTIVE));
-        return new ModelAndView("auth");
+        model.addAttribute("message", "User created successfully");
+        return new ModelAndView("reg");
+
+
 //        try {
 //            userService.saveUser(user);
 //            return new ModelAndView("auth");
