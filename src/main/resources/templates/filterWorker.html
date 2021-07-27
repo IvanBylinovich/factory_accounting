@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>workers</title>
+</head>
+<body>
+<p>Home</p>
+<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
+<div><a href="/db">db h2<</a></div>
+<div><a href="/">home</a></div>
+<div><a href="/user/reg">registration</a></div>
+<div><a href="/user/login">login<</a></div>
+<div><p>======УЧЕТ======</p></div>
+<div><a href="/product/create">Creation of product</a></div>
+<div><a href="/product/filter">Filter of product</a></div>
+<div><a href="/worker/create">Creation of worker</a></div>
+<div><a href="/worker/filter">Filter of worker</a></div>
+<div>
+    <div><p>======LIST OF WORKERS======</p></div>
+    <section th:each="worker : ${workers}">
+        <p th:text="${worker}"></p>
+        <ul>
+            <li th:each="phone: ${worker}"></li>
+        </ul>
+    </section>
+</div>
+</body>
+</html>

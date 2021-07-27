@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>Creation of worker</title>
+</head>
+<body>
+
+<form th:action="@{/worker/create}" th:object="${worker}" method="POST">
+  <div  class="mb-3">
+    <label for="workerName" class="form-label">Name of worker</label>
+    <input th:field="*{name}" type="text" class="form-control" id="workerName" name="name"/>
+  </div>
+  <div  class="mb-3">
+    <label for="workerSpecialization" class="form-label">Specialization of worker</label>
+    <input th:field="*{specialization}" type="text" class="form-control" id="workerSpecialization" name="specialization"/>
+  </div>
+  <button type="submit" class="create">Submit</button>
+</form>
+<div class="alert alert-primary" role="alert">
+  <li th:text="${message}"></li>
+</div>
+</body>
+</html>
