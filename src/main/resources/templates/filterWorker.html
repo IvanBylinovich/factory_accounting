@@ -6,7 +6,6 @@
     <title>workers</title>
 </head>
 <body>
-<p>Home</p>
 <div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
 <div><a href="/db">db h2<</a></div>
 <div><a href="/">home</a></div>
@@ -17,6 +16,10 @@
 <div><a href="/product/filter">Filter of product</a></div>
 <div><a href="/worker/create">Creation of worker</a></div>
 <div><a href="/worker/filter">Filter of worker</a></div>
+<div><p>======производство======</p></div>
+<div><a href="/receiptOrderOfGoods/create">Creation of receipt Order Of Goods</a></div>
+<div><a href="/receiptOrderOfGoods/filter">Filter of Creation of receipt Order Of Goods</a></div>
+
 <div>
     <div><p>======LIST OF WORKERS======</p></div>
     <section th:each="worker : ${workers}">

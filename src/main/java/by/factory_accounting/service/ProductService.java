@@ -20,4 +20,8 @@ public class ProductService {
     public List<Product> getAllProduct(){
         return productRepository.findAll();
     }
+
+    public void receipt(List<Product> productList){
+        productRepository.saveAll(productList);
+    }
 }

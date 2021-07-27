@@ -27,7 +27,9 @@ public class Operation {
     private List<Product> manufacturedProducts;
     @ManyToMany
     private List<Worker> workers;
+
     private BigDecimal payment; //плата рабочему за оперецию
+    private BigDecimal amountCost;//все затраты
 
 
 }

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>Creation of worker</title>
+</head>
+<body>
+
+<form th:action="@{/ReceiptOrderOfGoods/create}" th:object="${receiptOrderOfGoods}" method="POST">
+  <div  class="mb-3">
+    <label for="quantity" class="form-label">Name of worker</label>
+    <input th:field="*{quantity}" type="text" class="form-control" id="quantity" name="quantity"/>
+  </div>
+  <div  class="mb-3">
+    <label for="prise" class="form-label">Specialization of worker</label>
+    <input th:field="*{prise}" type="text" class="form-control" id="prise" name="prise"/>
+  </div>
+  <button type="submit" class="create">Submit</button>
+</form>
+<div class="alert alert-primary" role="alert">
+  <li th:text="${message}"></li>
+</div>
+
+<section th:each="product : ${products}">
+  <p th:text="${product}"></p>
+  <ul>
+    <li th:each="phone: ${product}"></li>
+  </ul>
+</section>
+</body>
+</html>

@@ -18,8 +18,6 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private BigDecimal quantity;//количество
-    private BigDecimal price;
     private String unit;//единица измерения
     private BigDecimal expenditure;//расход на изделие
 

@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title><html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      <head>
+      <meta charset="UTF-8">
+      <title>workers</title>
 </head>
 <body>
-<p>Home</p>
 <div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
 <div><a href="/db">db h2<</a></div>
 <div><a href="/">home</a></div>
@@ -20,17 +22,14 @@
 <div><p>======производство======</p></div>
 <div><a href="/receiptOrderOfGoods/create">Creation of receipt Order Of Goods</a></div>
 <div><a href="/receiptOrderOfGoods/filter">Filter of Creation of receipt Order Of Goods</a></div>
-
 <div>
-    <form th:action="@{/user/logout}" method="post">
-        <button>LOGOUT</button>
-    </form>
-    <section th:each="user : ${users}">
-        <p th:text="${user}"></p>
-        <ul>
-            <li th:each="phone: ${user}"></li>
-        </ul>
-    </section>
+  <div><p>======LIST OF RECEIPT ORDERS======</p></div>
+  <section th:each="product : ${products}">
+    <p th:text="${product}"></p>
+    <ul>
+      <li th:each="name: ${product}"></li>
+    </ul>
+  </section>
 </div>
 </body>
 </html>
