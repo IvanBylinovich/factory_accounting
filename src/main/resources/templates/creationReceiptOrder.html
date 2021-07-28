@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form th:action="@{/ReceiptOrderOfGoods/create}" th:object="${receiptOrderOfGoods}" method="POST">
+<form th:action="@{/receiptOrder/create}" th:object="${receiptOrderOfGoods}" th:object="${product}" method="POST">
   <div  class="mb-3">
     <label for="quantity" class="form-label">Name of worker</label>
     <input th:field="*{quantity}" type="text" class="form-control" id="quantity" name="quantity"/>
@@ -16,8 +16,14 @@
     <label for="prise" class="form-label">Specialization of worker</label>
     <input th:field="*{prise}" type="text" class="form-control" id="prise" name="prise"/>
   </div>
+  <div  class="mb-3">
+    <label for="name" class="form-label">Name of product</label>
+    <input th:field="*{name}" type="text" class="form-control" id="name" name="name"/>
+  </div>
+
   <button type="submit" class="create">Submit</button>
 </form>
+
 <div class="alert alert-primary" role="alert">
   <li th:text="${message}"></li>
 </div>

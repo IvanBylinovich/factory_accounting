@@ -20,14 +20,14 @@
 <div><a href="/worker/create">Creation of worker</a></div>
 <div><a href="/worker/filter">Filter of worker</a></div>
 <div><p>======производство======</p></div>
-<div><a href="/receiptOrderOfGoods/create">Creation of receipt Order Of Goods</a></div>
-<div><a href="/receiptOrderOfGoods/filter">Filter of Creation of receipt Order Of Goods</a></div>
+<div><a href="/receiptOrder/create">Creation of receipt Order Of Goods</a></div>
+<div><a href="/receiptOrder/filter">Filter of Creation of receipt Order Of Goods</a></div>
 <div>
   <div><p>======LIST OF RECEIPT ORDERS======</p></div>
-  <section th:each="product : ${products}">
-    <p th:text="${product}"></p>
+  <section th:each="receiptOrdersOfGoods : ${receiptOrders}">
+    <p th:text="${receiptOrdersOfGoods}"></p>
     <ul>
-      <li th:each="name: ${product}"></li>
+      <li th:each="name: ${receiptOrdersOfGoods}"></li>
     </ul>
   </section>
 </div>

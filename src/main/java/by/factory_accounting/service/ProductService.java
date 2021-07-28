@@ -24,4 +24,8 @@ public class ProductService {
     public void receipt(List<Product> productList){
         productRepository.saveAll(productList);
     }
+
+    public Product findByName (String name){
+        return productRepository.findByName(name);
+    }
 }

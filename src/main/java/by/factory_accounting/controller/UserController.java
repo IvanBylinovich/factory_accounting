@@ -30,15 +30,6 @@ public class UserController {
 
     //@PoseMapping login уже готов у секюрити
 
-    @GetMapping("/testUser")
-    public ModelAndView testUser(){
-        return new ModelAndView("testUser");
-    }
-    @GetMapping("/testAdmin")
-    public ModelAndView testAdmin(){
-        return new ModelAndView("testAdmin");
-    }
-
     @GetMapping("/reg")
     public ModelAndView registration(Model model){
         model.addAttribute("userDto", new UserDto());
@@ -56,12 +47,6 @@ public class UserController {
         return new ModelAndView("reg");
 
 
-//        try {
-//            userService.saveUser(user);
-//            return new ModelAndView("auth");
-//        } catch (RuntimeException e) {
-//            model.addAttribute("message", e.getMessage());
-//            return new ModelAndView("testRegPage");
-//        }
+
     }
 }
