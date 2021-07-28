@@ -21,14 +21,14 @@ public class Operation {
     private String name;
 
 
-    @OneToMany
+    @ManyToMany
     private List<Product> spentProducts;
-    @OneToMany
+    @ManyToMany
     private List<Product> manufacturedProducts;
     @ManyToMany
     private List<Worker> workers;
 
-    private BigDecimal payment; //плата рабочему за оперецию
+    private BigDecimal payment; //плата рабочему за оперецию(складывается цена израсходованный материалов + плата за операцию)
     private BigDecimal amountCost;//все затраты
 
 

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -13,8 +14,8 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public void create (Product product){
-        productRepository.save(product);
+    public Product create (Product product){
+        return productRepository.save(product);
     }
 
     public List<Product> getAllProduct(){
@@ -25,7 +26,7 @@ public class ProductService {
         productRepository.saveAll(productList);
     }
 
-    public Product findByName (String name){
-        return productRepository.findByName(name);
+    public Optional<Product> findByName (String name){
+        return Optional.ofNullable(productRepository.findByName(name));
     }
 }

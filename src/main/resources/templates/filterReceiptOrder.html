@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-      <head>
-      <meta charset="UTF-8">
-      <title>workers</title>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <title>RECEIPT ORDERS</title>
 </head>
 <body>
 <div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
@@ -24,12 +21,26 @@
 <div><a href="/receiptOrder/filter">Filter of Creation of receipt Order Of Goods</a></div>
 <div>
   <div><p>======LIST OF RECEIPT ORDERS======</p></div>
-  <section th:each="receiptOrdersOfGoods : ${receiptOrders}">
-    <p th:text="${receiptOrdersOfGoods}"></p>
-    <ul>
-      <li th:each="name: ${receiptOrdersOfGoods}"></li>
-    </ul>
-  </section>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Prise</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Unit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="receiptOrder, state: ${receiptOrders}">
+      <td th:utext="${state.count}">count</td>
+      <td th:text="${receiptOrder.product.name}">Onions</td>
+      <td th:text="${receiptOrder.prise}">Onions</td>
+      <td th:text="${receiptOrder.quantity}">Onions</td>
+      <td th:text="${receiptOrder.product.unit}">Onions</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>

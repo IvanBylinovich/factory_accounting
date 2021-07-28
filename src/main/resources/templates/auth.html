@@ -5,6 +5,20 @@
   <title>Spring Security Example </title>
 </head>
 <body>
+<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
+<div><a href="/db">db h2<</a></div>
+<div><a href="/">home</a></div>
+<div><a href="/user/reg">registration</a></div>
+<div><a href="/user/login">login<</a></div>
+<div><p>======УЧЕТ======</p></div>
+<div><a href="/product/create">Creation of product</a></div>
+<div><a href="/product/filter">Filter of product</a></div>
+<div><a href="/worker/create">Creation of worker</a></div>
+<div><a href="/worker/filter">Filter of worker</a></div>
+<div><p>======производство======</p></div>
+<div><a href="/receiptOrder/create">Creation of receipt Order Of Goods</a></div>
+<div><a href="/receiptOrder/filter">Filter of Creation of receipt Order Of Goods</a></div>
+<div>
 <div th:if="${param.error}">
   Invalid username and password.
 </div>

@@ -7,32 +7,34 @@
 </head>
 <body>
 
-<form th:action="@{/receiptOrder/create}" th:object="${receiptOrderOfGoods}" th:object="${product}" method="POST">
-  <div  class="mb-3">
-    <label for="quantity" class="form-label">Name of worker</label>
-    <input th:field="*{quantity}" type="text" class="form-control" id="quantity" name="quantity"/>
-  </div>
-  <div  class="mb-3">
-    <label for="prise" class="form-label">Specialization of worker</label>
-    <input th:field="*{prise}" type="text" class="form-control" id="prise" name="prise"/>
-  </div>
-  <div  class="mb-3">
-    <label for="name" class="form-label">Name of product</label>
-    <input th:field="*{name}" type="text" class="form-control" id="name" name="name"/>
+
+<div>
+
+  <form th:action="@{/receiptOrder/create}" th:object="${receiptOrderDTO}" method="POST">
+    <div  class="mb-3">
+      <label for="orderQuantity" class="form-label">Name of product</label>
+      <input th:field="*{productName}" type="text" class="form-control" id="orderQuantity" name="quantity"/>
+    </div>
+    <div  class="mb-3">
+      <label for="orderPrice" class="form-label">Quantity of products</label>
+      <input th:field="*{quantity}" type="text" class="form-control" id="orderPrice" name="Price"/>
+    </div>
+    <div  class="mb-3">
+      <label for="productUnit" class="form-label">Unit  of goods</label>
+      <input th:field="*{unit}" type="text" class="form-control" id="productUnit" name="unit"/>
+    </div>
+    <div  class="mb-3">
+      <label for="productName" class="form-label">Price</label>
+      <input th:field="*{price}" type="text" class="form-control" id="productName" name="productName"/>
+    </div>
+    <button type="submit" class="create">Submit</button>
+  </form>
+  <div class="alert alert-primary" role="alert">
+    <li th:text="${message}"></li>
   </div>
 
-  <button type="submit" class="create">Submit</button>
-</form>
-
-<div class="alert alert-primary" role="alert">
-  <li th:text="${message}"></li>
 </div>
 
-<section th:each="product : ${products}">
-  <p th:text="${product}"></p>
-  <ul>
-    <li th:each="phone: ${product}"></li>
-  </ul>
-</section>
+
 </body>
 </html>

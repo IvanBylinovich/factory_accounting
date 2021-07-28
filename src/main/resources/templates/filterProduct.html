@@ -1,6 +1,7 @@
 <html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <meta charset="UTF-8">
     <title>workers</title>
 </head>
@@ -18,12 +19,27 @@
 <div><a href="/worker/filter">Filter of worker</a></div>
 <div>
     <div><p>======LIST OF PRODUCT======</p></div>
-    <section th:each="product : ${products}">
-        <p th:text="${product}"></p>
-        <ul>
-            <li th:each="name: ${product}"></li>
-        </ul>
-    </section>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Unit</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, state  : ${products}">
+            <td th:utext="${state.count}">count</td>
+
+            <td th:text="${product.name}">Onions</td>
+            <td th:text="${product.unit}">Onions</td>
+        </tr>
+       </tbody>
+    </table>
+
+
+
+
 </div>
 </body>
 </html>

@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 //ордер оприходывания товаров для производства позволяет решить вопрос с разными ценами на один и тот же товар
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-public class ReceiptOrderOfGoods {
+public class ReceiptOrder {
 
     @Id
     private long id;
