@@ -25,4 +25,8 @@ public class Product {
         this.name = name;
         this.unit = unit;
     }
+
+    public Product(String name) {
+        this.name = name;
+    }
 }

@@ -7,23 +7,36 @@
 </head>
 <body>
 
+
+<form th:action="@{/operation/create/addSpentProduct}" th:object="${operation}" th:method="post">
+  <div>
+    <label>Название:&nbsp;</label>
+    <input type="text" th:field="*{operation.spentProducts.set}"></input>
+  </div>
+  <div>
+    <button type="submit">Добавить в расходные материалы</button>
+  </div>
+</form>
+
 <table>
   <thead>
   <tr>
     <th>ID</th>
-    <th>Животное</th>
+    <th>Продукт</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="product, iterStat : ${spentProducts}">
-    <td th:text="${iterStat.index}+1"></td>
+  <tr th:each="product, state : ${spentProducts}">
+    <td th:text="${state.count}"></td>
     <td th:text="${product.name}"></td>
   </tr>
   </tbody>
 </table>
 
 
-
+<div class="alert alert-primary" role="alert">
+  <li th:text="${message}"></li>
+</div>
 
 
 </body>
