@@ -31,5 +31,7 @@ public class Operation {
     private BigDecimal payment; //плата рабочему за оперецию(складывается цена израсходованный материалов + плата за операцию)
     private BigDecimal amountCost;//все затраты
 
-
+    public Operation(String name) {
+        this.name = name;
+    }
 }

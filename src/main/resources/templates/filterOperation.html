@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <p>OPERATIONS</p>
+    <div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
+    <div><a href="/db">db h2<</a></div>
+    <div><a href="/">home</a></div>
+    <div><a href="/user/reg">registration</a></div>
+    <div><a href="/user/login">login<</a></div>
+    <div><p>======УЧЕТ======</p></div>
+    <div><a href="/product/create">Creation of product</a></div>
+    <div><a href="/product/filter">Filter of product</a></div>
+    <div><a href="/worker/create">Creation of worker</a></div>
+    <div><a href="/worker/filter">Filter of worker</a></div>
+
+        <div><p>======LIST OF OPERATIONS======</p></div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Unit</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product, state  : ${products}">
+                <td th:utext="${state.count}">count</td>
+
+                <td th:text="${product.name}">Onions</td>
+                <td th:text="${product.unit}">Onions</td>
+            </tr>
+            </tbody>
+        </table>
+
+        </head>
+<body>
+
+</body>
+</html>

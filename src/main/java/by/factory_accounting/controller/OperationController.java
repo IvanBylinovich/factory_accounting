@@ -27,5 +27,12 @@ public class OperationController {
         model.addAttribute("manufacturedProducts", manufacturedProducts);
         return new ModelAndView("creationOfOperation");
     }
+    @GetMapping("/create/addSpentProduct")
+    public String addSpentProducts(Model model, Product product) {
+        List<Product> spentProduct =(ArrayList<Product>) model.getAttribute("spentProduct");
+        spentProduct.add(product);
+
+        return "redirect:/operation/create";
+    }
 
 }

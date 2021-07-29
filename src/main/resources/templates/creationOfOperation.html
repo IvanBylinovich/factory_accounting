@@ -3,24 +3,20 @@
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <meta charset="UTF-8">
-  <title>Filter</title>
+  <title>operation creation</title>
 </head>
 <body>
 
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Животное</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="product, iterStat : ${spentProducts}">
-    <td th:text="${iterStat.index}+1"></td>
-    <td th:text="${product.name}"></td>
-  </tr>
-  </tbody>
-</table>
+<form th:action="@{/operation/create}" th:object="${operation}" method="POST">
+  <div  class="mb-3">
+    <label for="operationName" class="form-label">Name of worker</label>
+    <input th:field="*{name}" type="text" class="form-control" id="operationName" name="name"/>
+  </div>
+  <button type="submit" class="create">Submit</button>
+</form>
+<div class="alert alert-primary" role="alert">
+  <li th:text="${message}"></li>
+</div>
 
 
 
