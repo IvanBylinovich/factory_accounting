@@ -7,37 +7,34 @@
 </head>
 <body>
 
+<form th:action="@{/operation/create}" th:object="${operationDTO}" method="POST">
+  <div  class="mb-3">
+    <label for="operationName" class="form-label">Name of operation</label>
+    <input th:field="*{operationName}" type="text" class="form-control" id="operationName" name="name"/>
+  </div>
+  <div  class="mb-3">
+    <label for="spendProductName" class="form-label">Name of operation</label>
+    <input th:field="*{spendProductName}" type="text" class="form-control" id="spendProductName" name="spendProduct"/>
+  </div>
+  <div  class="mb-3">
+    <label for="manufacturedProductName" class="form-label">Name of operation</label>
+    <input th:field="*{manufacturedProductName}" type="text" class="form-control" id="manufacturedProductName" name="manufacturedProduct"/>
+  </div>
+  <div  class="mb-3">
+    <label for="workerName" class="form-label">Name of operation</label>
+    <input th:field="*{workerName}" type="text" class="form-control" id="workerName" name="workerName"/>
+  </div>
+  <div  class="mb-3">
+    <label for="operationPayment" class="form-label">Name of operation</label>
+    <input th:field="*{operationPayment}" type="text" class="form-control" id="operationPayment" name="payment"/>
+  </div>
 
-<form th:action="@{/operation/create/addSpentProduct}" th:object="${operation}" th:method="post">
-  <div>
-    <label>Название:&nbsp;</label>
-    <input type="text" th:field="*{operation.spentProducts.set}"></input>
-  </div>
-  <div>
-    <button type="submit">Добавить в расходные материалы</button>
-  </div>
+  <button type="submit" class="create">Submit</button>
 </form>
-
-<table>
-  <thead>
-  <tr>
-    <th>ID</th>
-    <th>Продукт</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="product, state : ${spentProducts}">
-    <td th:text="${state.count}"></td>
-    <td th:text="${product.name}"></td>
-  </tr>
-  </tbody>
-</table>
-
 
 <div class="alert alert-primary" role="alert">
   <li th:text="${message}"></li>
 </div>
-
 
 </body>
 </html>

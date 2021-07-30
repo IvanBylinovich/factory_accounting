@@ -27,4 +27,12 @@ public class OperationService {
     public void createOperation(Operation operation){
        operationRepository.save(operation);
     }
+
+    public boolean isExists(String name){
+        return operationRepository.existsByName(name);
+    }
+
+    public Operation save(Operation operation){
+       return operationRepository.save(operation);
+    }
 }

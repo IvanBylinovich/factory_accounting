@@ -25,4 +25,12 @@ public class WorkerService {
     public List<Worker> getAllWorker(){
         return workerRepository.findAll();
     }
+
+    public boolean existsByName(String name){
+        return workerRepository.existsByName(name);
+    }
+
+    public Optional<Worker> findByName(String name){
+        return  workerRepository.findByName(name);
+    }
 }

@@ -29,4 +29,7 @@ public class ProductService {
     public Optional<Product> findByName (String name){
         return Optional.ofNullable(productRepository.findByName(name));
     }
+    public boolean existsByName(String name){
+        return productRepository.existsByName(name);
+    }
 }
