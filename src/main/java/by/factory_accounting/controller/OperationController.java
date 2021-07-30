@@ -58,5 +58,11 @@ public class OperationController {
         return new ModelAndView("creationOfOperation");
     }
 
+    @GetMapping("/filter")
+    public ModelAndView filterOperation(Model model){
+        model.addAttribute("operationsDTO", converterDTO.getDTOListFromOperationList(operationService.getAll()));
+        return new ModelAndView("filterOperation");
+    }
+
 
 }

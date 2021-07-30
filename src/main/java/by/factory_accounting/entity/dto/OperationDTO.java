@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OperationDTO {
 
+    private long id;
     private String operationName;
     private String spendProductName;
     private String manufacturedProductName;
@@ -20,4 +21,20 @@ public class OperationDTO {
     private BigDecimal operationPayment; //плата рабочему за оперецию(складывается цена израсходованный материалов + плата за операцию)
     private BigDecimal amountCost;//все затраты
 
+    public OperationDTO(String operationName, String spendProductName, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
+        this.operationName = operationName;
+        this.spendProductName = spendProductName;
+        this.manufacturedProductName = manufacturedProductName;
+        this.workerName = workerName;
+        this.operationPayment = operationPayment;
+    }
+
+    public OperationDTO(long id, String operationName, String spendProductName, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
+        this.id = id;
+        this.operationName = operationName;
+        this.spendProductName = spendProductName;
+        this.manufacturedProductName = manufacturedProductName;
+        this.workerName = workerName;
+        this.operationPayment = operationPayment;
+    }
 }

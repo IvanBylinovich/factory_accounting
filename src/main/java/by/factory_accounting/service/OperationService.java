@@ -35,4 +35,8 @@ public class OperationService {
     public Operation save(Operation operation){
        return operationRepository.save(operation);
     }
+
+    public List<Operation> getAll(){
+        return operationRepository.findAll();
+    }
 }

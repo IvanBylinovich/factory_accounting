@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <meta charset="UTF-8">
-    <title>Title</title>
-    <p>OPERATIONS</p>
+    <title>OPERATIONS</title>
+</head>
+
+
     <div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
     <div><a href="/db">db h2<</a></div>
     <div><a href="/">home</a></div>
@@ -20,16 +23,23 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Id</th>
                 <th scope="col">Name</th>
-                <th scope="col">Unit</th>
+                <th scope="col">spentProduct</th>
+                <th scope="col">manufacturedProduct</th>
+                <th scope="col">worker</th>
+                <th scope="col">payment</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="product, state  : ${products}">
+            <tr th:each="operationDTO, state  : ${operationsDTO}">
                 <td th:utext="${state.count}">count</td>
-
-                <td th:text="${product.name}">Onions</td>
-                <td th:text="${product.unit}">Onions</td>
+                <td th:text="${operationDTO.id}">Onions</td>
+                <td th:text="${operationDTO.operationName}">Onions</td>
+                <td th:text="${operationDTO.spentProduct}">Onions</td>
+                <td th:text="${operationDTO.manufacturedProductName}">Onions</td>
+                <td th:text="${operationDTO.workerName}">Onions</td>
+                <td th:text="${operationDTO.operationPayment}">Onions</td>
             </tr>
             </tbody>
         </table>

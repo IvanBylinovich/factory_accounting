@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ConverterDTO {
 
@@ -27,5 +30,25 @@ public class ConverterDTO {
                 productService.findByName(DTO.getManufacturedProductName()).get(),
                 workerService.findByName(DTO.getWorkerName()).get(),
                 DTO.getOperationPayment());
+    }
+
+    public OperationDTO getDTOFromOperation(Operation operation){
+         return new OperationDTO(
+                 operation.getId(),
+                 operation.getName(),
+                 operation.getSpentProduct().getName(),
+                 operation.getManufacturedProduct().getName(),
+                 operation.getWorker().getName(),
+                 operation.getPayment());
+    }
+
+
+    public List<OperationDTO>  getDTOListFromOperationList(List<Operation> operationList){
+        List<OperationDTO> operationDTOList = new ArrayList<>();
+
+        for(Operation operation : operationList){
+            operationDTOList.add(getDTOFromOperation(operation));
+        }
+        return operationDTOList;
     }
 }
