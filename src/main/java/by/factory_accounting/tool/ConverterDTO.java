@@ -27,6 +27,7 @@ public class ConverterDTO {
         return new Operation(
                 DTO.getOperationName(),
                 productService.findByName(DTO.getSpendProductName()).get(),
+                DTO.getRequiredQuantityForProduction(),
                 productService.findByName(DTO.getManufacturedProductName()).get(),
                 workerService.findByName(DTO.getWorkerName()).get(),
                 DTO.getOperationPayment());
@@ -37,6 +38,7 @@ public class ConverterDTO {
                  operation.getId(),
                  operation.getName(),
                  operation.getSpentProduct().getName(),
+                 operation.getRequiredQuantityForProduction(),
                  operation.getManufacturedProduct().getName(),
                  operation.getWorker().getName(),
                  operation.getPayment());

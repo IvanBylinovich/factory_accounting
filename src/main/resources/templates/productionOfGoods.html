@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title>Creation of worker</title>
+</head>
+<body>
+
+
+<div>
+
+    <form th:action="@{/production}" th:object="${productionDTO}" method="POST">
+        <div  class="mb-3">
+            <label for="Name" class="form-label">Name of product</label>
+            <input th:field="*{operationName}" type="text" class="form-control" id="Name" name="operationName"/>
+        </div>
+        <div  class="mb-3">
+            <label for="orderQuantity" class="form-label">Quantity of products</label>
+            <input th:field="*{quantity}" type="text" class="form-control" id="orderQuantity" name="quantity"/>
+        </div>
+
+        <button type="submit" class="create">Submit</button>
+    </form>
+    <div class="alert alert-primary" role="alert">
+        <li th:text="${message}"></li>
+    </div>
+
+</div>
+
+
+</body>
+</html>

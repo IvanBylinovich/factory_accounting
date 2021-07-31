@@ -20,6 +20,7 @@ public class Operation {
 
     @OneToOne
     private Product spentProduct;
+    private BigDecimal requiredQuantityForProduction;
     @OneToOne
     private Product manufacturedProduct;
     @OneToOne
@@ -29,9 +30,10 @@ public class Operation {
     private BigDecimal amountCost;//все затраты
 
 
-    public Operation(String name, Product spentProduct, Product manufacturedProduct, Worker worker, BigDecimal payment) {
+     public Operation(String name, Product spentProduct, BigDecimal requiredQuantityForProduction, Product manufacturedProduct, Worker worker, BigDecimal payment) {
         this.name = name;
         this.spentProduct = spentProduct;
+        this.requiredQuantityForProduction = requiredQuantityForProduction;
         this.manufacturedProduct = manufacturedProduct;
         this.worker = worker;
         this.payment = payment;

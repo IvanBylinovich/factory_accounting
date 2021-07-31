@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/user/reg").permitAll()
                 .antMatchers("/user/testUser", "/product/filter", "/worker/filter", "/receiptOrder/filter", "/operation/filter").hasAuthority(Permission.USER_READ.getPermission())
-                .antMatchers("/user/testAdmin", "/product/**","/worker/**", "/operation/**").hasAuthority(Permission.USER_WRITE.getPermission())
+                .antMatchers("/user/testAdmin", "/product/**","/worker/**", "/operation/**", "/production/**").hasAuthority(Permission.USER_WRITE.getPermission())
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

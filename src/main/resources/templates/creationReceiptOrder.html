@@ -19,9 +19,18 @@
       <label for="orderPrice" class="form-label">Quantity of products</label>
       <input th:field="*{quantity}" type="text" class="form-control" id="orderPrice" name="Price"/>
     </div>
-    <div  class="mb-3">
-      <label for="productUnit" class="form-label">Unit  of goods</label>
-      <input th:field="*{unit}" type="text" class="form-control" id="productUnit" name="unit"/>
+    <div  type="text" class="mb-3" id="productUnit" >
+      <label for="unit" class="form-label">Unit</label>
+      <select name="unit" th:field="*{unit}" type="text" id="unit" class="form-select" placeholder="Количество пассажиров">
+        <option value="PSC">PSC</option>
+        <option value="KG">KG</option>
+        <option value="M">M</option>
+        <option value="mm">mm</option>
+        <option value="MMK">MMK</option>
+        <option value="MK">MK</option>
+        <option value="MMQ">MMQ</option>
+        <option value="MQ">MQ</option>
+      </select>
     </div>
     <div  class="mb-3">
       <label for="productName" class="form-label">Price</label>

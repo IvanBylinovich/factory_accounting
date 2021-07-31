@@ -26,6 +26,7 @@ public class ReceiptOrderController {
 
     @GetMapping("/create")
     public ModelAndView creation(Model model){
+
         model.addAttribute("receiptOrderDTO", new ReceiptOrderDTO());
         return  new ModelAndView("creationReceiptOrder");
     }

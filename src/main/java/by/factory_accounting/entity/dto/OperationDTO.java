@@ -16,23 +16,26 @@ public class OperationDTO {
     private long id;
     private String operationName;
     private String spendProductName;
+    private BigDecimal requiredQuantityForProduction;
     private String manufacturedProductName;
     private String workerName;
     private BigDecimal operationPayment; //плата рабочему за оперецию(складывается цена израсходованный материалов + плата за операцию)
     private BigDecimal amountCost;//все затраты
 
-    public OperationDTO(String operationName, String spendProductName, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
+    public OperationDTO(long id, String operationName, String spendProductName, BigDecimal requiredQuantityForProduction, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
+        this.id = id;
         this.operationName = operationName;
         this.spendProductName = spendProductName;
+        this.requiredQuantityForProduction = requiredQuantityForProduction;
         this.manufacturedProductName = manufacturedProductName;
         this.workerName = workerName;
         this.operationPayment = operationPayment;
     }
 
-    public OperationDTO(long id, String operationName, String spendProductName, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
-        this.id = id;
+    public OperationDTO(String operationName, String spendProductName, BigDecimal requiredQuantityForProduction, String manufacturedProductName, String workerName, BigDecimal operationPayment) {
         this.operationName = operationName;
         this.spendProductName = spendProductName;
+        this.requiredQuantityForProduction = requiredQuantityForProduction;
         this.manufacturedProductName = manufacturedProductName;
         this.workerName = workerName;
         this.operationPayment = operationPayment;
