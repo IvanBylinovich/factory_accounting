@@ -35,127 +35,109 @@ public class OperationService {
         this.receiptOrderService = receiptOrderService;
     }
 
-    public Optional<Operation> findByProductName(String name){
+    public Optional<Operation> findByProductName(String name) {
         return operationRepository.findByName(name);
     }
 
-    public void createOperation(Operation operation){
-       operationRepository.save(operation);
+    public void createOperation(Operation operation) {
+        operationRepository.save(operation);
     }
 
-    public boolean isExists(String name){
+    public boolean isExists(String name) {
         return operationRepository.existsByName(name);
     }
 
-    public Operation save(Operation operation){
-       return operationRepository.save(operation);
+    public Operation save(Operation operation) {
+        return operationRepository.save(operation);
     }
 
-    public List<Operation> getAll(){
+    public List<Operation> getAll() {
         return operationRepository.findAll();
     }
 
     //выполнение операции, расходует расходуемый товар(списывая его из приходов), производит другой товар расчитывая его стоимость, записывая его через новые приходы.
-    public boolean performOperation(Operation operation, BigDecimal quantity){
+    public boolean performOperation(Operation operation, BigDecimal quantity) {
 
         //лист для приходов которые будут расходываться при производстве
-        List<ReceiptOrder> receiptOrderQueue = new ArrayList<>();
+        List<ReceiptOrder> receiptOrders = new ArrayList<>();
         List<BigDecimal> pricesFromOrders = new ArrayList<>();
         BigDecimal amountMaterialConsumption = new BigDecimal(0);
-        BigDecimal newPrice = new BigDecimal(0);
-        BigDecimal newQuantity;
-        BigDecimal workerPayment;
+        BigDecimal performGoodsPrice = new BigDecimal(0);
+
 
         //вычисляем количество затрачиваемыч товар для указанного количества операций(перемножаем повторение на рассход)
         amountMaterialConsumption = amountMaterialConsumption.add(quantity).multiply(operation.getRequiredQuantityForProduction());
 
+        System.out.println(amountMaterialConsumption + "вычисляем количество затрачиваемыч товар для указанного количества операций(перемножаем повторение на рассход");
 
-        System.out.println(amountMaterialConsumption + "вычисляем количество затрачиваемыч товар для указанного количества операций(перемножаем повторение на рассход)");
+        System.out.println(receiptOrderRepository.sumQuantity(operation.getSpentProduct()) + "вычисляем количество затрачиваемыч товар для указанного количества операций(перемножаем повторение на рассход");
 
+        //проверяем хватает ли сырья
+        if (amountMaterialConsumption.compareTo(receiptOrderRepository.sumQuantity(operation.getSpentProduct())) <= 0) {
+        } else return false;
 
-
-        for (ReceiptOrder order : receiptOrderRepository.findAllByProductAndQuantityIsNotNullOrderByPriseAsc(operation.getSpentProduct())){
-            if(amountMaterialConsumption.compareTo(new BigDecimal(0)) > 0 ){
-                receiptOrderQueue.add(order);
-                amountMaterialConsumption =  amountMaterialConsumption.subtract(order.getQuantity());
-            }else break; //означает что затрачеваемого товара хватила
-
-            return false;// не хватило
-        }
-        logger.info(receiptOrderQueue.toString());
-
-
-
-        System.out.println(receiptOrderQueue.toString());
-
-
-
-        //повторяю все то же свамок тк BigDecimal инмьютебал
-        BigDecimal amountMaterialConsumption2 = new BigDecimal(0);
-
-        System.out.println(amountMaterialConsumption2 + "повторяю все то же свамок тк BigDecimal инмьютебал");
-
-
-        //вычисляем количество затрачиваемыч товар для указанного количества операций(перемножаем повторение на рассход)
-        amountMaterialConsumption2 = amountMaterialConsumption.add(quantity).multiply(operation.getRequiredQuantityForProduction());
-
-        System.out.println(amountMaterialConsumption2 + "повторяю все то же свамок тк BigDecimal инмьютебал");
+        receiptOrders.addAll(receiptOrderRepository.findAllByProductOrderByPriseAsc(operation.getSpentProduct()));
 
         //списывается с приходов затраченные материалы
-        for (ReceiptOrder order : receiptOrderQueue){
-            if(order.getQuantity().compareTo(amountMaterialConsumption2) == 0){
-                amountMaterialConsumption2 = new BigDecimal(0);
+        for (ReceiptOrder order : receiptOrders) {
+            if (order.getQuantity().compareTo(amountMaterialConsumption) == 0) {
+                amountMaterialConsumption = new BigDecimal(0);
                 order.setQuantity(new BigDecimal(0));
 
                 pricesFromOrders.add(order.getPrise());
 
-            }else if(order.getQuantity().compareTo(amountMaterialConsumption2) < 0){
-                amountMaterialConsumption2 = amountMaterialConsumption2.subtract(order.getQuantity());
+            } else if (order.getQuantity().compareTo(amountMaterialConsumption) < 0) {
+                amountMaterialConsumption = amountMaterialConsumption.subtract(order.getQuantity());
                 order.setQuantity(new BigDecimal(0));
 
                 pricesFromOrders.add(order.getPrise());
 
-            }else if(order.getQuantity().compareTo(amountMaterialConsumption2) > 0){
-                order.setQuantity(order.getQuantity().subtract(amountMaterialConsumption2));
-                amountMaterialConsumption2 = new BigDecimal(0);
+            } else if (order.getQuantity().compareTo(amountMaterialConsumption) > 0) {
+                order.setQuantity(order.getQuantity().subtract(amountMaterialConsumption));
+                amountMaterialConsumption = new BigDecimal(0);
 
                 pricesFromOrders.add(order.getPrise());
             }
         }
+        //сохраняем в базу список с изменненми приходами
+        editReceiptOrders(receiptOrders);
 
-        //выщитывем среднюю цену потраченных продуктов
-        for(BigDecimal price : pricesFromOrders){
-            newPrice = newPrice.add(price);
+        //выщитывем сумму цен из приходов для вычисления средней цены потраченных продуктов
+        for (BigDecimal price : pricesFromOrders) {
+            performGoodsPrice = performGoodsPrice.add(price);
         }
+        System.out.println("=============================================");
+        System.out.println(new BigDecimal(pricesFromOrders.size()) + "ордера");
+        System.out.println( "цена произведенный товар");
+        System.out.println(performGoodsPrice.divide(new BigDecimal(pricesFromOrders.size())) + "цена произведенный товар");
+        System.out.println("=============================================");
 
-        System.out.println(newPrice + "выщитывем среднюю цену потраченных продуктов");
 
+        performGoodsPrice = performGoodsPrice.divide(new BigDecimal(pricesFromOrders.size()));
 
-        //выщитываем зарплату рабочему
-        workerPayment = quantity.multiply(operation.getPayment());
+        //выщитывем цену произведенных продуктов
+        performGoodsPrice = performGoodsPrice.multiply(operation.getRequiredQuantityForProduction());
+        performGoodsPrice = performGoodsPrice.add(operation.getPayment());
 
-        System.out.println(workerPayment + "зарплату рабочему");
-
-        newPrice = newPrice.divide(new BigDecimal(
-                pricesFromOrders.size()))
-                .add(operation.getPayment())
-                .add(workerPayment);
-
-        //выщитываем количество произведенного товара
-        newQuantity = quantity.multiply(operation.getRequiredQuantityForProduction());
-
-        System.out.println(newQuantity + "количество произведенного товара");
+//        System.out.println("=============================================");
+//        System.out.println(operation.getManufacturedProduct() + "произведенный товар");
+//        System.out.println(quantity + "количество произведенного товара");
+//        System.out.println(performGoodsPrice + "цена");
+//        System.out.println("=============================================");
 
 
         //сохраняем произведенный товар в базе посредство сохранения прихода
-        receiptOrderService.create(new ReceiptOrder(
-                operation.getManufacturedProduct(),
-                newQuantity,
-                newPrice));
+        ReceiptOrder receiptOrder = new ReceiptOrder(operation.getManufacturedProduct(), quantity, performGoodsPrice);
+        receiptOrderRepository.save(receiptOrder);
+
 
         return true;
+
     }
 
+    public List<ReceiptOrder> editReceiptOrders(List<ReceiptOrder> receiptOrders) {
+        return receiptOrderRepository.saveAll(receiptOrders);
+    }
 
 
 }

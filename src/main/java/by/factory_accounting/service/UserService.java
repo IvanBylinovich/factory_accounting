@@ -55,4 +55,8 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
+    public boolean existByEmail(String email){
+       return userRepository.existsByEmail(email);
+    }
+
 }

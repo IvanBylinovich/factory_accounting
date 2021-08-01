@@ -13,19 +13,17 @@ import java.util.Optional;
 public class ReceiptOrderService {
 
     @Autowired
-    ReceiptOrderRepository receiptOrderOfGoodsRepository;
+    ReceiptOrderRepository orderRepository;
     @Autowired
    ProductRepository productRepository;
 
-    public boolean create(ReceiptOrder receiptOrderOfGoods){
-        Optional<ReceiptOrder> receivedReceiptOrder = Optional.ofNullable(receiptOrderOfGoods);
-        if(receivedReceiptOrder.isPresent()){
-            receiptOrderOfGoodsRepository.save(receiptOrderOfGoods);
+    public boolean create(ReceiptOrder order){
+
+            orderRepository.save(order);
             return true;
-        }
-        return false;
+
     }
     public List<ReceiptOrder> getAllReceiptOrder(){
-        return receiptOrderOfGoodsRepository.findAll();
+        return orderRepository.findAll();
     }
 }

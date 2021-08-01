@@ -3,6 +3,7 @@ package by.factory_accounting.controller;
 import by.factory_accounting.entity.accounting.Operation;
 import by.factory_accounting.entity.dto.ProductionDTO;
 import by.factory_accounting.service.OperationService;
+import by.factory_accounting.service.ReceiptOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,8 @@ public class ProductionController {
 
     @Autowired
     OperationService operationService;
+    @Autowired
+    ReceiptOrderService receiptOrderService;
 
     @GetMapping
     public ModelAndView production(Model model){
@@ -32,12 +35,15 @@ public class ProductionController {
         Optional<Operation> operationOptional =  operationService.findByProductName(productionDTO.getOperationName());
 
         if(operationOptional.isPresent()){
-            operationService.performOperation(operationOptional.get(), productionDTO.getQuantity());
-            model.addAttribute("message", "Operation perform successfully");
+            if(operationService.performOperation(operationOptional.get(), productionDTO.getQuantity())) {
+                model.addAttribute("message", "Operation perform successfully");
+                return new ModelAndView("productionOfGoods");
+            }
+            model.addAttribute("message", "Недостаточно сырья!");
             return new ModelAndView("productionOfGoods");
         }
 
-        model.addAttribute("message", "Error");
+        model.addAttribute("message", "Такой операции не существует, создайте её прежде чем выполнять!");
         return new ModelAndView("productionOfGoods");
     }
 }
