@@ -12,26 +12,33 @@
     <label for="operationName" class="form-label">Name of operation</label>
     <input th:field="*{operationName}" type="text" class="form-control" id="operationName" name="name"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('operationName')}" th:errors="*{operationName}">operation name errors</div>
   <div  class="mb-3">
     <label for="spendProductName" class="form-label">Spend Product Name</label>
     <input th:field="*{spendProductName}" type="text" class="form-control" id="spendProductName" name="spendProduct"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('spendProductName')}" th:errors="*{spendProductName}">spendProductName name errors</div>
   <div  class="mb-3">
     <label for="manufacturedProductName" class="form-label">manufactured Product Name</label>
     <input th:field="*{manufacturedProductName}" type="text" class="form-control" id="manufacturedProductName" name="manufacturedProduct"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('manufacturedProductName')}" th:errors="*{manufacturedProductName}">manufacturedProductName errors</div>
   <div  class="mb-3">
     <label for="requiredQuantityForProduction" class="form-label">required Quantity For Production</label>
     <input th:field="*{requiredQuantityForProduction}" type="text" class="form-control" id="requiredQuantityForProduction" name="requiredQuantity"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('requiredQuantityForProduction')}" th:errors="*{requiredQuantityForProduction}">requiredQuantityForProduction errors</div>
   <div  class="mb-3">
     <label for="workerName" class="form-label">worker Name</label>
     <input th:field="*{workerName}" type="text" class="form-control" id="workerName" name="workerName"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('workerName')}" th:errors="*{workerName}">workerName errors</div>
+
   <div  class="mb-3">
     <label for="operationPayment" class="form-label">operation Payment</label>
     <input th:field="*{operationPayment}" type="text" class="form-control" id="operationPayment" name="payment"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('operationPayment')}" th:errors="*{operationPayment}">operationPayment errors</div>
 
   <button type="submit" class="create">Submit</button>
 </form>

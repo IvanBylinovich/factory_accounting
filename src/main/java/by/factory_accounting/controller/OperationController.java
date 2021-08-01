@@ -3,16 +3,21 @@ package by.factory_accounting.controller;
 import by.factory_accounting.entity.accounting.Product;
 import by.factory_accounting.entity.dto.OperationDTO;
 import by.factory_accounting.entity.dto.ProductionDTO;
+import by.factory_accounting.entity.dto.WorkerDTO;
 import by.factory_accounting.service.OperationService;
 import by.factory_accounting.service.ProductService;
 import by.factory_accounting.service.WorkerService;
 import by.factory_accounting.tool.ConverterDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Service
 @RequestMapping("/operation")
@@ -36,14 +41,15 @@ public class OperationController {
 
 
     @GetMapping("/create")
-    public ModelAndView createOperationGet(Model model) {
-
-        model.addAttribute("operationDTO", new OperationDTO());
+    public ModelAndView createOperationGet(@ModelAttribute("operationDTO") OperationDTO operationDTO, Model model) {
         return new ModelAndView("creationOfOperation");
     }
 
     @PostMapping("/create")
-    public ModelAndView createOperationPost(Model model, OperationDTO operationDTO){
+    public ModelAndView createOperationPost(@ModelAttribute("operationDTO") @Valid  OperationDTO operationDTO, BindingResult bindingResult, Model model){
+
+            if(bindingResult.hasErrors()) return new ModelAndView("creationOfOperation");
+
         if(
                 productService.existsByName(operationDTO.getSpendProductName())
                 && productService.existsByName(operationDTO.getManufacturedProductName())

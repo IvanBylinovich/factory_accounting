@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.config.ConfigFileApplicationListener;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -14,11 +17,19 @@ import java.util.List;
 public class OperationDTO {
 
     private long id;
+    @NotEmpty(message = "Enter your operation name!")
     private String operationName;
+    @NotEmpty(message = "Enter your spend product name!")
     private String spendProductName;
+    @NotNull(message = "Enter the product quantity")
+    @Min(value = 1, message = "Price must be more than 0")
     private BigDecimal requiredQuantityForProduction;
+    @NotEmpty(message = "Enter your manufactured product name!")
     private String manufacturedProductName;
+    @NotEmpty(message = "Enter your worker name!")
     private String workerName;
+    @NotNull(message = "Enter the operation payment")
+    @Min(value = 1, message = "Price must be more than 0")
     private BigDecimal operationPayment; //плата рабочему за оперецию(складывается цена израсходованный материалов + плата за операцию)
     private BigDecimal amountCost;//все затраты
 
@@ -29,7 +40,6 @@ public class OperationDTO {
         this.requiredQuantityForProduction = requiredQuantityForProduction;
         this.manufacturedProductName = manufacturedProductName;
         this.workerName = workerName;
-        this.operationPayment = operationPayment;
     }
 
     public OperationDTO(String operationName, String spendProductName, BigDecimal requiredQuantityForProduction, String manufacturedProductName, String workerName, BigDecimal operationPayment) {

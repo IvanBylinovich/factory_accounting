@@ -8,11 +8,14 @@ import by.factory_accounting.service.ReceiptOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -25,13 +28,16 @@ public class ReceiptOrderController {
     ReceiptOrderService receiptOrderService;
 
     @GetMapping("/create")
-    public ModelAndView creation(Model model){
+    public ModelAndView creation(Model model, @ModelAttribute("receiptOrderDTO") ReceiptOrderDTO receiptOrderDTO){
 
-        model.addAttribute("receiptOrderDTO", new ReceiptOrderDTO());
         return  new ModelAndView("creationReceiptOrder");
     }
+
     @PostMapping("/create")
-    public ModelAndView creation(ReceiptOrderDTO receiptOrderDTO, Model model) {
+    public ModelAndView creation(@ModelAttribute("receiptOrderDTO") @Valid ReceiptOrderDTO receiptOrderDTO, BindingResult bindingResult, Model model) {
+
+        if(bindingResult.hasErrors()) return new ModelAndView("creationReceiptOrder");
+
         Optional<Product> foundProduct = productService.findByName(receiptOrderDTO.getProductName());
         ReceiptOrder receiptOrder = new ReceiptOrder();
 

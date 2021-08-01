@@ -29,10 +29,12 @@
                 <label for="Email" class="form-label">Email</label>
                 <input th:field="*{username}" type="text" class="form-control" id="Email" placeholder="example@gmail.ru">
             </div>
+            <div style="color: crimson" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username errors</div>
             <div class="col-12">
                 <label for="inputPassword4" class="form-label">Password</label>
                 <input th:field="*{password}" type="password" class="form-control" id="inputPassword4">
             </div>
+            <div style="color: crimson" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password errors</div>
             <div class="col-12 mt-2">
                 <button class="btn btn-primary">Sign in</button>
             </div>
@@ -42,5 +44,6 @@
 <div class="alert alert-primary" role="alert">
     <li th:text="${message}"></li>
 </div>
+
 </body>
 </html>

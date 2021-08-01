@@ -7,15 +7,17 @@
 </head>
 <body>
 
-<form th:action="@{/worker/create}" th:object="${worker}" method="POST">
+<form th:action="@{/worker/create}" th:object="${workerDTO}" method="POST">
   <div  class="mb-3">
     <label for="workerName" class="form-label">Name of worker</label>
     <input th:field="*{name}" type="text" class="form-control" id="workerName" name="name"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name errors</div>
   <div  class="mb-3">
     <label for="workerSpecialization" class="form-label">Specialization of worker</label>
     <input th:field="*{specialization}" type="text" class="form-control" id="workerSpecialization" name="specialization"/>
   </div>
+  <div style="color: crimson" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}">name errors</div>
   <button type="submit" class="create">Submit</button>
 </form>
 <div class="alert alert-primary" role="alert">
