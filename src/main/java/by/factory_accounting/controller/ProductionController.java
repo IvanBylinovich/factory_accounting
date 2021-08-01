@@ -34,7 +34,7 @@ public class ProductionController {
     }
 
     @PostMapping
-    public ModelAndView productionPost(@ModelAttribute("product") @Valid ProductionDTO productionDTO, BindingResult bindingResult, Model model){
+    public ModelAndView productionPost(@ModelAttribute("productionDTO") @Valid ProductionDTO productionDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) return new ModelAndView("productionOfGoods");
 
         Optional<Operation> operationOptional =  operationService.findByProductName(productionDTO.getOperationName());

@@ -3,46 +3,36 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 <head>
-    <meta charset="UTF-8">
-    <title>Reg</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <title>Reg</title>
 </head>
 <body>
-<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
-<div><a href="/db">db h2<</a></div>
-<div><a href="/">home</a></div>
-<div><a href="/user/reg">registration</a></div>
-<div><a href="/user/login">login<</a></div>
-<div><p>======УЧЕТ======</p></div>
-<div><a href="/product/create">Creation of product</a></div>
-<div><a href="/product/filter">Filter of product</a></div>
-<div><a href="/worker/create">Creation of worker</a></div>
-<div><a href="/worker/filter">Filter of worker</a></div>
-<div><p>======производство======</p></div>
-<div><a href="/receiptOrder/create">Creation of receipt Order Of Goods</a></div>
-<div><a href="/receiptOrder/filter">Filter of Creation of receipt Order Of Goods</a></div>
-<div>
+<div th:insert="~{header::header}"></div>
+
 
 <div class="row d-flex justify-content-center">
-    <div class="col-6 justify-content-center">
-        <form th:action="@{/user/reg}" th:object="${userDto}" method="POST" class="row g-6">
-            <div class="col-md-12">
-                <label for="Email" class="form-label">Email</label>
-                <input th:field="*{username}" type="text" class="form-control" id="Email" placeholder="example@gmail.ru">
-            </div>
-            <div style="color: crimson" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username errors</div>
-            <div class="col-12">
-                <label for="inputPassword4" class="form-label">Password</label>
-                <input th:field="*{password}" type="password" class="form-control" id="inputPassword4">
-            </div>
-            <div style="color: crimson" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password errors</div>
-            <div class="col-12 mt-2">
-                <button class="btn btn-primary">Sign in</button>
-            </div>
-        </form>
-    </div>
+  <div class="col-6 justify-content-center">
+    <form th:action="@{/user/reg}" th:object="${userDto}" method="POST" class="row g-6">
+      <div class="col-md-12">
+        <label for="Email" class="form-label">Email</label>
+        <input th:field="*{username}" type="text" class="form-control" id="Email" placeholder="example@gmail.ru">
+      </div>
+      <div style="color: crimson" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">username errors</div>
+      <div class="col-12">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input th:field="*{password}" type="password" class="form-control" id="inputPassword4">
+      </div>
+      <div style="color: crimson" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password errors</div>
+      <div class="col-12 mt-2">
+        <button class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+  </div>
 </div>
 <div class="alert alert-primary" role="alert">
-    <li th:text="${message}"></li>
+  <li th:text="${message}"></li>
 </div>
 
 </body>

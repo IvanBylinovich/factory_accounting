@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <meta charset="UTF-8">
-  <title>Creation of worker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>  <meta charset="UTF-8">
+    <title>Creation of worker</title>
 </head>
 <body>
+
+<div th:insert="~{header::header}"></div>
 
 
 <div>
 
-  <form th:action="@{/receiptOrder/create}" th:object="${receiptOrderDTO}" method="POST">
-    <div  class="mb-3">
-      <label for="orderQuantity" class="form-label">Name of product</label>
-      <input th:field="*{productName}" type="text" class="form-control" id="orderQuantity" name="quantity"/>
+
+    <form th:action="@{/receiptOrder/create}" th:object="${receiptOrderDTO}" method="POST">
+        <div  class="mb-3">
+            <label for="orderQuantity" class="form-label">Name of product</label>
+            <input th:field="*{productName}" type="text" class="form-control" id="orderQuantity" name="quantity"/>
+        </div>
+        <div style="color: crimson" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">productName errors</div>
+        <div  class="mb-3">
+            <label for="orderPrice" class="form-label">Quantity of products</label>
+            <input th:field="*{quantity}" type="text" class="form-control" id="orderPrice" name="Price"/>
+        </div>
+        <div style="color: crimson" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">quantity errors</div>
+        <div  type="text" class="mb-3" id="productUnit" >
+            <label for="unit" class="form-label">Unit</label>
+            <select name="unit" th:field="*{unit}" type="text" id="unit" class="form-select" placeholder="Количество пассажиров">
+                <option value="PSC">PSC</option>
+                <option value="KG">KG</option>
+                <option value="M">M</option>
+                <option value="mm">mm</option>
+                <option value="MMK">MMK</option>
+                <option value="MK">MK</option>
+                <option value="MMQ">MMQ</option>
+                <option value="MQ">MQ</option>
+            </select>
+        </div>
+        <div  class="mb-3">
+            <label for="productName" class="form-label">Price</label>
+            <input th:field="*{price}" type="text" class="form-control" id="productName" name="productName"/>
+        </div>
+        <div style="color: crimson" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price errors</div>
+        <button type="submit" class="create">Submit</button>
+    </form>
+    <div class="alert alert-primary" role="alert">
+        <li th:text="${message}"></li>
     </div>
-    <div style="color: crimson" th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}">productName errors</div>
-    <div  class="mb-3">
-      <label for="orderPrice" class="form-label">Quantity of products</label>
-      <input th:field="*{quantity}" type="text" class="form-control" id="orderPrice" name="Price"/>
-    </div>
-    <div style="color: crimson" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">quantity errors</div>
-    <div  type="text" class="mb-3" id="productUnit" >
-      <label for="unit" class="form-label">Unit</label>
-      <select name="unit" th:field="*{unit}" type="text" id="unit" class="form-select" placeholder="Количество пассажиров">
-        <option value="PSC">PSC</option>
-        <option value="KG">KG</option>
-        <option value="M">M</option>
-        <option value="mm">mm</option>
-        <option value="MMK">MMK</option>
-        <option value="MK">MK</option>
-        <option value="MMQ">MMQ</option>
-        <option value="MQ">MQ</option>
-      </select>
-    </div>
-    <div  class="mb-3">
-      <label for="productName" class="form-label">Price</label>
-      <input th:field="*{price}" type="text" class="form-control" id="productName" name="productName"/>
-    </div>
-    <div style="color: crimson" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">price errors</div>
-    <button type="submit" class="create">Submit</button>
-  </form>
-  <div class="alert alert-primary" role="alert">
-    <li th:text="${message}"></li>
-  </div>
 
 </div>
 

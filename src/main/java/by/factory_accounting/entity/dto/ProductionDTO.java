@@ -14,7 +14,7 @@ public class ProductionDTO {
     @NotEmpty(message = "Enter your operation name!")
     private String operationName;
     @NotNull(message = "Enter the product quantity")
-    @Min(value = 1, message = "Price must be more than 0")
+    @Min(value = 0, message = "Price must be more than 0")
     private BigDecimal quantity;
 
 }

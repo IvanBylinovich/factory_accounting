@@ -2,38 +2,15 @@
 <html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>Home</title>
 </head>
 <body>
-<p>Home</p>
-<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
-<div><a href="/db">db h2<</a></div>
-<div><a href="/">home</a></div>
-<div><a href="/user/reg">registration</a></div>
-<div><a href="/user/login">login<</a></div>
-<div><p>======УЧЕТ======</p></div>
-<div><a href="/product/create">Creation of product</a></div>
-<div><a href="/product/filter">Filter of product</a></div>
-<div><a href="/worker/create">Creation of worker</a></div>
-<div><a href="/worker/filter">Filter of worker</a></div>
-<div><p>======производство======</p></div>
-<div><a href="/receiptOrder/create">Creation of receipt Order Of Goods</a></div>
-<div><a href="/receiptOrder/filter">Filter receipt Order Of Goods</a></div>
-<div><a href="/operation/create">Creation of operation</a></div>
-<div><a href="/operation/filter">Filter of operation</a></div>
-<div><a href="/production">PRODUCTION</a></div>
+<div th:insert="~{header::header}"></div>
 
-<div>
-    <form th:action="@{/user/logout}" method="post">
-        <button>LOGOUT</button>
-    </form>
-    <section th:each="user : ${users}">
-        <p th:text="${user}"></p>
-        <ul>
-            <li th:each="phone: ${user}"></li>
-        </ul>
-    </section>
-</div>
+<h4>Welcome you to the production account!</h4>
+
 </body>
 </html>

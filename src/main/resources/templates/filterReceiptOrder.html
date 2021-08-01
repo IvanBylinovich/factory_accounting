@@ -2,25 +2,14 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <title>RECEIPT ORDERS</title>
 </head>
 <body>
-<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
-<div><a href="/db">db h2<</a></div>
-<div><a href="/">home</a></div>
-<div><a href="/user/reg">registration</a></div>
-<div><a href="/user/login">login<</a></div>
-<div><p>======УЧЕТ======</p></div>
-<div><a href="/product/create">Creation of product</a></div>
-<div><a href="/product/filter">Filter of product</a></div>
-<div><a href="/worker/create">Creation of worker</a></div>
-<div><a href="/worker/filter">Filter of worker</a></div>
-<div><p>======производство======</p></div>
-<div><a href="/receiptOrder/create">Creation of receipt Order Of Goods</a></div>
-<div><a href="/receiptOrder/filter">Filter of Creation of receipt Order Of Goods</a></div>
+<div th:insert="~{header::header}"></div>
+<div><p>======LIST OF RECEIPT ORDERS======</p></div>
 <div>
-  <div><p>======LIST OF RECEIPT ORDERS======</p></div>
   <table class="table">
     <thead>
     <tr>

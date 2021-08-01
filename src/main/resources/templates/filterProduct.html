@@ -2,40 +2,30 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <title>products</title>
 </head>
 <body>
-<p>Home</p>
-<div><p>======АДМИНИСТРИРОВАНИЕ======</p></div>
-<div><a href="/db">db h2<</a></div>
-<div><a href="/">home</a></div>
-<div><a href="/user/reg">registration</a></div>
-<div><a href="/user/login">login<</a></div>
-<div><p>======УЧЕТ======</p></div>
-<div><a href="/product/create">Creation of product</a></div>
-<div><a href="/product/filter">Filter of product</a></div>
-<div><a href="/worker/create">Creation of worker</a></div>
-<div><a href="/worker/filter">Filter of worker</a></div>
-<div>
-    <div><p>======LIST OF PRODUCT======</p></div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Unit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product, state  : ${products}">
-            <td th:utext="${state.count}">count</td>
+<div th:insert="~{header::header}"></div>
+<div><p>======LIST OF PRODUCT======</p></div>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Unit</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, state  : ${products}">
+        <td th:utext="${state.count}">count</td>
 
-            <td th:text="${product.name}">Onions</td>
-            <td th:text="${product.unit}">Onions</td>
-        </tr>
-       </tbody>
-    </table>
+        <td th:text="${product.name}">Onions</td>
+        <td th:text="${product.unit}">Onions</td>
+    </tr>
+    </tbody>
+</table>
 
 
 

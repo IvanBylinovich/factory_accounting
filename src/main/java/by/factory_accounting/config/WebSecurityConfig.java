@@ -48,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)//закрытие сессии
                 .clearAuthentication(true)
                 .deleteCookies("JSESSIONID")//удаляет ключ по которому автоидентифицировался user
-                .logoutSuccessUrl("/user/login");//страница на которую перенаправляет после logout
+                .logoutSuccessUrl("/");//страница на которую перенаправляет после logout
 
     }
 

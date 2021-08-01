@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <meta charset="UTF-8">
-  <title>Creation of worker</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Creation of worker</title>
 </head>
 <body>
+<div th:insert="~{header::header}"></div>
 
 <form th:action="@{/worker/create}" th:object="${workerDTO}" method="POST">
-  <div  class="mb-3">
-    <label for="workerName" class="form-label">Name of worker</label>
-    <input th:field="*{name}" type="text" class="form-control" id="workerName" name="name"/>
-  </div>
-  <div style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name errors</div>
-  <div  class="mb-3">
-    <label for="workerSpecialization" class="form-label">Specialization of worker</label>
-    <input th:field="*{specialization}" type="text" class="form-control" id="workerSpecialization" name="specialization"/>
-  </div>
-  <div style="color: crimson" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}">name errors</div>
-  <button type="submit" class="create">Submit</button>
+    <div  class="mb-3">
+        <label for="workerName" class="form-label">Name of worker</label>
+        <input th:field="*{name}" type="text" class="form-control" id="workerName" name="name"/>
+    </div>
+    <div style="color: crimson" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name errors</div>
+    <div  class="mb-3">
+        <label for="workerSpecialization" class="form-label">Specialization of worker</label>
+        <input th:field="*{specialization}" type="text" class="form-control" id="workerSpecialization" name="specialization"/>
+    </div>
+    <div style="color: crimson" th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}">name errors</div>
+    <button type="submit" class="create">Submit</button>
 </form>
 <div class="alert alert-primary" role="alert">
-  <li th:text="${message}"></li>
+    <li th:text="${message}"></li>
 </div>
 </body>
 </html>
