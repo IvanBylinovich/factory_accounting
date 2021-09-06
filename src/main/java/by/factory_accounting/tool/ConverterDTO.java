@@ -5,7 +5,6 @@ import by.factory_accounting.entity.dto.OperationDTO;
 import by.factory_accounting.service.ProductService;
 import by.factory_accounting.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class ConverterDTO {
         this.productService = productService1;
     }
 
-    public Operation  getOperationFromDTO(OperationDTO DTO){
+    public Operation getOperationFromDTO(OperationDTO DTO) {
         return new Operation(
                 DTO.getOperationName(),
                 productService.findByName(DTO.getSpendProductName()).get(),
@@ -33,22 +32,21 @@ public class ConverterDTO {
                 DTO.getOperationPayment());
     }
 
-    public OperationDTO getDTOFromOperation(Operation operation){
-         return new OperationDTO(
-                 operation.getId(),
-                 operation.getName(),
-                 operation.getSpentProduct().getName(),
-                 operation.getRequiredQuantityForProduction(),
-                 operation.getManufacturedProduct().getName(),
-                 operation.getWorker().getName(),
-                 operation.getPayment());
+    public OperationDTO getDTOFromOperation(Operation operation) {
+        return new OperationDTO(
+                operation.getId(),
+                operation.getName(),
+                operation.getSpentProduct().getName(),
+                operation.getRequiredQuantityForProduction(),
+                operation.getManufacturedProduct().getName(),
+                operation.getWorker().getName(),
+                operation.getPayment());
     }
 
-
-    public List<OperationDTO>  getDTOListFromOperationList(List<Operation> operationList){
+    public List<OperationDTO> getDTOListFromOperationList(List<Operation> operationList) {
         List<OperationDTO> operationDTOList = new ArrayList<>();
 
-        for(Operation operation : operationList){
+        for (Operation operation : operationList) {
             operationDTOList.add(getDTOFromOperation(operation));
         }
         return operationDTOList;

@@ -15,10 +15,10 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
+
 public class OperationService {
 
     private final Logger logger = Logger.getLogger("OperationServiceLogger");
-
 
     private final OperationRepository operationRepository;
     private final ProductRepository productRepository;
@@ -35,7 +35,7 @@ public class OperationService {
         this.receiptOrderService = receiptOrderService;
     }
 
-    public Optional<Operation> findByProductName(String name) {
+    public Optional<Operation> findByOperationName(String name) {
         return operationRepository.findByName(name);
     }
 
@@ -55,7 +55,7 @@ public class OperationService {
         return operationRepository.findAll();
     }
 
-    //выполнение операции, расходует расходуемый товар(списывая его из приходов), производит другой товар расчитывая его стоимость, записывая его через новые приходы.
+    //выполнение операции, расходует товар-сырье(списывая его из приходов), производит другой товар расчитывая его стоимость, записывая его через новые приходы.
     public boolean performOperation(Operation operation, BigDecimal quantity) {
 
         //лист для приходов которые будут расходываться при производстве
@@ -108,7 +108,7 @@ public class OperationService {
         }
         System.out.println("=============================================");
         System.out.println(new BigDecimal(pricesFromOrders.size()) + "ордера");
-        System.out.println( "цена произведенный товар");
+        System.out.println("цена произведенный товар");
         System.out.println(performGoodsPrice.divide(new BigDecimal(pricesFromOrders.size())) + "цена произведенный товар");
         System.out.println("=============================================");
 

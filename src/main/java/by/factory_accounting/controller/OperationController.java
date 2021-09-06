@@ -1,9 +1,6 @@
 package by.factory_accounting.controller;
 
-import by.factory_accounting.entity.accounting.Product;
 import by.factory_accounting.entity.dto.OperationDTO;
-import by.factory_accounting.entity.dto.ProductionDTO;
-import by.factory_accounting.entity.dto.WorkerDTO;
 import by.factory_accounting.service.OperationService;
 import by.factory_accounting.service.ProductService;
 import by.factory_accounting.service.WorkerService;
@@ -23,12 +20,10 @@ import javax.validation.Valid;
 @RequestMapping("/operation")
 public class OperationController {
 
-
     private final ProductService productService;
     private final WorkerService workerService;
     private final OperationService operationService;
     private final ConverterDTO converterDTO;
-
 
     public OperationController(ProductService productService, WorkerService workerService, OperationService operationService, ConverterDTO converterDTO) {
         this.productService = productService;
@@ -37,24 +32,21 @@ public class OperationController {
         this.converterDTO = converterDTO;
     }
 
-
-
-
     @GetMapping("/create")
     public ModelAndView createOperationGet(@ModelAttribute("operationDTO") OperationDTO operationDTO, Model model) {
         return new ModelAndView("creationOfOperation");
     }
 
     @PostMapping("/create")
-    public ModelAndView createOperationPost(@ModelAttribute("operationDTO") @Valid  OperationDTO operationDTO, BindingResult bindingResult, Model model){
+    public ModelAndView createOperationPost(@ModelAttribute("operationDTO") @Valid OperationDTO operationDTO, BindingResult bindingResult, Model model) {
 
-            if(bindingResult.hasErrors()) return new ModelAndView("creationOfOperation");
+        if (bindingResult.hasErrors()) return new ModelAndView("creationOfOperation");
 
-        if(
+        if (
                 productService.existsByName(operationDTO.getSpendProductName())
-                && productService.existsByName(operationDTO.getManufacturedProductName())
-                && workerService.existsByName(operationDTO.getWorkerName())
-                && !(operationService.isExists(operationDTO.getOperationName()))){
+                        && productService.existsByName(operationDTO.getManufacturedProductName())
+                        && workerService.existsByName(operationDTO.getWorkerName())
+                        && !(operationService.isExists(operationDTO.getOperationName()))) {
 
             operationService.save(converterDTO.getOperationFromDTO(operationDTO));
 
@@ -67,7 +59,7 @@ public class OperationController {
     }
 
     @GetMapping("/filter")
-    public ModelAndView filterOperation(Model model){
+    public ModelAndView filterOperation(Model model) {
         model.addAttribute("operationsDTO", converterDTO.getDTOListFromOperationList(operationService.getAll()));
         return new ModelAndView("filterOperation");
     }

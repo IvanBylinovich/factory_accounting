@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReceiptOrderService {
@@ -15,15 +14,15 @@ public class ReceiptOrderService {
     @Autowired
     ReceiptOrderRepository orderRepository;
     @Autowired
-   ProductRepository productRepository;
+    ProductRepository productRepository;
 
-    public boolean create(ReceiptOrder order){
+    public boolean create(ReceiptOrder order) {
 
-            orderRepository.save(order);
-            return true;
-
+        orderRepository.save(order);
+        return true;
     }
-    public List<ReceiptOrder> getAllReceiptOrder(){
+
+    public List<ReceiptOrder> getAllReceiptOrder() {
         return orderRepository.findAll();
     }
 }

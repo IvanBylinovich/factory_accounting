@@ -58,7 +58,7 @@ public class UserSecurityDetails implements UserDetails {
     }
 
     //метод возвращает из моего user объект user который является классом Security
-    public static UserDetails fromUser(User user){
+    public static UserDetails fromUser(User user) {
         return new org.springframework.security.core.userdetails
                 .User(
                 user.getEmail(),

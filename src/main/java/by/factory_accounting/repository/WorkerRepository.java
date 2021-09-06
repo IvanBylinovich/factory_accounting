@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
 
     boolean existsByName(String name);
-     Optional<Worker> findByName(String name);
+
+    Optional<Worker> findByName(String name);
 }

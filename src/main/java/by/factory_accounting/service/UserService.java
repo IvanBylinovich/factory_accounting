@@ -19,15 +19,15 @@ import java.util.Optional;
 @Qualifier("userService")
 public class UserService implements UserDetailsService {
 
-    protected PasswordEncoder passwordEncoder(){
+    protected PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(12);
     }
 
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository){
-        this.userRepository =userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -37,26 +37,26 @@ public class UserService implements UserDetailsService {
         return UserSecurityDetails.fromUser(user);
     }
 
-    public User saveUser(User user){
+    public User saveUser(User user) {
         String newPassword = passwordEncoder().encode(user.getPassword());
         user.setPassword(newPassword);
         return userRepository.save(user);
     }
 
-    public List<User> allUsers(){
+    public List<User> allUsers() {
         return userRepository.findAll();
     }
 
-    public User findUserById(long id){
+    public User findUserById(long id) {
         return userRepository.getById(id);
     }
 
-    public Optional<User> findUserByEmail(String email){
+    public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public boolean existByEmail(String email){
-       return userRepository.existsByEmail(email);
+    public boolean existByEmail(String email) {
+        return userRepository.existsByEmail(email);
     }
 
 }

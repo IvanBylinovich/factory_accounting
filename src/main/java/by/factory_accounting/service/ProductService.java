@@ -14,22 +14,23 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public Product create (Product product){
+    public Product create(Product product) {
         return productRepository.save(product);
     }
 
-    public List<Product> getAllProduct(){
+    public List<Product> getAllProduct() {
         return productRepository.findAll();
     }
 
-    public void receipt(List<Product> productList){
+    public void receipt(List<Product> productList) {
         productRepository.saveAll(productList);
     }
 
-    public Optional<Product> findByName (String name){
+    public Optional<Product> findByName(String name) {
         return Optional.ofNullable(productRepository.findByName(name));
     }
-    public boolean existsByName(String name){
+
+    public boolean existsByName(String name) {
         return productRepository.existsByName(name);
     }
 }

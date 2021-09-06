@@ -1,8 +1,5 @@
 package by.factory_accounting.controller;
 
-import by.factory_accounting.entity.user.Role;
-import by.factory_accounting.entity.user.Status;
-import by.factory_accounting.entity.user.User;
 import by.factory_accounting.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,12 +10,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class HomeController{
+public class HomeController {
     @Autowired
     UserService userService;
 
     @GetMapping
-    public ModelAndView home(Model model){
+    public ModelAndView home(Model model) {
 
         model.addAttribute("users", userService.allUsers());
         return new ModelAndView("home");

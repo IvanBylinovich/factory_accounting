@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Data
@@ -25,9 +28,11 @@ public class User {
 
     @Column(name = "password")
     private String password;
+
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status status;
@@ -36,6 +41,6 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = Role.USER;
-        this.status =  Status.USER_ACTIVE;
+        this.status = Status.USER_ACTIVE;
     }
 }

@@ -23,29 +23,27 @@ public class ProductController {
     ProductService productService;
 
     @GetMapping("/create")
-    public ModelAndView createProduct(Model model){
+    public ModelAndView createProduct(Model model) {
         model.addAttribute("product", new Product());
         return new ModelAndView("creationOfProduct");
     }
 
     @PostMapping("/create")
-    public ModelAndView create(@ModelAttribute("product") @Valid ProductDTO productDTO, BindingResult bindingResult, Model model){
-        if(bindingResult.hasErrors()) return new ModelAndView("creationOfProduct");
+    public ModelAndView create(@ModelAttribute("product") @Valid ProductDTO productDTO, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) return new ModelAndView("creationOfProduct");
 
-        if(productService.existsByName(productDTO.getName())){
+        if (productService.existsByName(productDTO.getName())) {
             model.addAttribute("message", "Such a product already exists!");
             return new ModelAndView("creationOfProduct");
         }
 
         productService.create(new Product(productDTO.getName(), productDTO.getUnit()));
-        model.addAttribute("message","Product created successfully");
+        model.addAttribute("message", "Product created successfully");
         return new ModelAndView("creationOfProduct");
-
-
     }
 
     @GetMapping("/filter")
-    public ModelAndView showProductFilter(Model model){
+    public ModelAndView showProductFilter(Model model) {
         model.addAttribute("products", productService.getAllProduct());
         return new ModelAndView("filterProduct");
     }

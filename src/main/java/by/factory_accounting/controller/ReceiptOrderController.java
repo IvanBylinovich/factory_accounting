@@ -28,22 +28,22 @@ public class ReceiptOrderController {
     ReceiptOrderService receiptOrderService;
 
     @GetMapping("/create")
-    public ModelAndView creation(Model model, @ModelAttribute("receiptOrderDTO") ReceiptOrderDTO receiptOrderDTO){
+    public ModelAndView creation(Model model, @ModelAttribute("receiptOrderDTO") ReceiptOrderDTO receiptOrderDTO) {
 
-        return  new ModelAndView("creationReceiptOrder");
+        return new ModelAndView("creationReceiptOrder");
     }
 
     @PostMapping("/create")
     public ModelAndView creation(@ModelAttribute("receiptOrderDTO") @Valid ReceiptOrderDTO receiptOrderDTO, BindingResult bindingResult, Model model) {
 
-        if(bindingResult.hasErrors()) return new ModelAndView("creationReceiptOrder");
+        if (bindingResult.hasErrors()) return new ModelAndView("creationReceiptOrder");
 
         Optional<Product> foundProduct = productService.findByName(receiptOrderDTO.getProductName());
         ReceiptOrder receiptOrder = new ReceiptOrder();
 
-        if(foundProduct.isPresent()){
+        if (foundProduct.isPresent()) {
             receiptOrder.setProduct(foundProduct.get());
-        }else {
+        } else {
             receiptOrder.setProduct(productService.create(new Product(receiptOrderDTO.getProductName(), receiptOrderDTO.getUnit())));
         }
         receiptOrder.setPrise(receiptOrderDTO.getPrice());
@@ -60,7 +60,7 @@ public class ReceiptOrderController {
     }
 
     @GetMapping("/filter")
-    public ModelAndView showProductFilter(Model model){
+    public ModelAndView showProductFilter(Model model) {
         model.addAttribute("receiptOrders", receiptOrderService.getAllReceiptOrder());
         return new ModelAndView("filterReceiptOrder");
     }

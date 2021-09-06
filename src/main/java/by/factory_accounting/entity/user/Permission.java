@@ -1,6 +1,7 @@
 package by.factory_accounting.entity.user;
 
 public enum Permission {
+
     USER_READ("read"),
     USER_WRITE("write");
 
