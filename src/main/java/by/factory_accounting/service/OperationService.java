@@ -5,6 +5,7 @@ import by.factory_accounting.entity.accounting.ReceiptOrder;
 import by.factory_accounting.repository.OperationRepository;
 import by.factory_accounting.repository.ProductRepository;
 import by.factory_accounting.repository.ReceiptOrderRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Service
+
 public class OperationService {
 
     private final Logger logger = Logger.getLogger("OperationServiceLogger");
@@ -35,7 +37,7 @@ public class OperationService {
         this.receiptOrderService = receiptOrderService;
     }
 
-    public Optional<Operation> findByProductName(String name) {
+    public Optional<Operation> findByOperationName(String name) {
         return operationRepository.findByName(name);
     }
 
@@ -55,7 +57,7 @@ public class OperationService {
         return operationRepository.findAll();
     }
 
-    //выполнение операции, расходует расходуемый товар(списывая его из приходов), производит другой товар расчитывая его стоимость, записывая его через новые приходы.
+    //выполнение операции, расходует товар-сырье(списывая его из приходов), производит другой товар расчитывая его стоимость, записывая его через новые приходы.
     public boolean performOperation(Operation operation, BigDecimal quantity) {
 
         //лист для приходов которые будут расходываться при производстве

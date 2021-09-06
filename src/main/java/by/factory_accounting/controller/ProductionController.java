@@ -1,7 +1,6 @@
 package by.factory_accounting.controller;
 
 import by.factory_accounting.entity.accounting.Operation;
-import by.factory_accounting.entity.dto.ProductDTO;
 import by.factory_accounting.entity.dto.ProductionDTO;
 import by.factory_accounting.service.OperationService;
 import by.factory_accounting.service.ReceiptOrderService;
@@ -37,7 +36,7 @@ public class ProductionController {
     public ModelAndView productionPost(@ModelAttribute("productionDTO") @Valid ProductionDTO productionDTO, BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) return new ModelAndView("productionOfGoods");
 
-        Optional<Operation> operationOptional =  operationService.findByProductName(productionDTO.getOperationName());
+        Optional<Operation> operationOptional =  operationService.findByOperationName(productionDTO.getOperationName());
 
         if(operationOptional.isPresent()){
             if(operationService.performOperation(operationOptional.get(), productionDTO.getQuantity())) {
