@@ -5,6 +5,7 @@ import by.factory_accounting.entity.accounting.ReceiptOrder;
 import by.factory_accounting.repository.OperationRepository;
 import by.factory_accounting.repository.ProductRepository;
 import by.factory_accounting.repository.ReceiptOrderRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

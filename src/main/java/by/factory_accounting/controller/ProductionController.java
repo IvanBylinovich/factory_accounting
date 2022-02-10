@@ -1,6 +1,7 @@
 package by.factory_accounting.controller;
 
 import by.factory_accounting.entity.accounting.Operation;
+import by.factory_accounting.entity.dto.ProductDTO;
 import by.factory_accounting.entity.dto.ProductionDTO;
 import by.factory_accounting.service.OperationService;
 import by.factory_accounting.service.ReceiptOrderService;
